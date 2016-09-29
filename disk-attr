@@ -1,0 +1,11 @@
+#!/bin/bash
+
+function disk_capacity_human_readable {
+    local BLOCK_DEV=$1
+
+    fdisk -l $BLOCK_DEV |head -n 1 |sed -e 's/.*://g' |sed -e 's/,.*//g'
+}
+
+for DISK in $(./list-disks); do
+    echo "$DISK: size: $(disk_capacity_human_readable /dev/$DISK) temp: $(hddtemp -n /dev/$DISK)" 
+done
