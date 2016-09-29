@@ -1,0 +1,5 @@
+#!/bin/bash
+
+for DISK in $(find /dev/ -name "sd*" |sed -e 's/[0-9]//g' |cut -f 3 -d "/" |grep -v "mapper" |sort |uniq); do
+    echo $DISK
+done
